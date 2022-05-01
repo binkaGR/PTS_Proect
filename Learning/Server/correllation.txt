@@ -1,0 +1,8 @@
+Coreletion analisis
+7000  11  67
+7001  13  73
+7002  18  78
+7003  12  71
+7004  16  73
+7005  14  70
+Correlation analis is equal: 0.87%
