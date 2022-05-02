@@ -1,0 +1,87 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <string.h>
+#include <math.h>
+#include <fstream>
+#include "Data_Base.dll"
+
+using namespace std;
+
+class Frequency_Distribution
+{
+    public:
+        int num_stud;
+        string Course_name;
+        Frequency_Distribution(string course_name)
+        {
+        Course_name=course_name;
+        Data_Base date=Data_Base(course_name);
+        string file_name=course_name+"_Frequency_Distribution.txt";
+        fstream file(file_name, std::fstream::out);
+        num_stud=date.get_Number_of_student(); 
+        if(file.is_open())
+        {
+        file<<"Frequency_Distribution\n";
+        for (int i=0;i<num_stud;i++)
+        	{
+                
+                file<<date.get_Studet_id(i)<<"  "<<date.get_Upload_excersize(i)<<endl;
+            }
+        }
+        else cout<<"file not exist!"<<endl;
+        file.close();
+    }
+
+    int function_Frequency_Distribution()
+    {
+        string file_name=Course_name+"_Frequency_Distribution.txt";
+        Data_Base date=Data_Base(Course_name);
+        fstream file(file_name, std::fstream::out| std::fstream::app);
+        int upload_exsersize[num_stud];
+        for(int i=0;i<num_stud;i++)
+        {
+            upload_exsersize[i]=date.get_Upload_excersize(i);
+        }
+        int swap;
+        for(int i=0;num_stud >i;i++)
+            {
+                for(int j=num_stud-1;j >i;j--)
+                if(upload_exsersize[j-1] >upload_exsersize[j])
+                {
+                    swap=upload_exsersize[j-1];
+                    upload_exsersize[j-1]=upload_exsersize[j];
+                    upload_exsersize[j]=swap;
+                }
+            }
+        int br=1;
+        if(file.is_open())
+        {
+        file<<"Frequency_Distribution analysis table!\n";
+        file<<"Number of uploaded exercises"<<" | "<<"Absolute frequency f"<<" | "<<"Relative frequency p (%)"<<endl;
+            for(int i=0;i<num_stud;i++)
+            {
+                int br=1;
+                int j=i;
+                while(j<num_stud)
+                {
+                    if(upload_exsersize[i]==upload_exsersize[j+1])
+                    {
+                        br++;
+                        j++;
+                    }
+                    else 
+                    {
+                        double frequency_Distribution;
+                        frequency_Distribution=(br*100)/10;
+                        file<<upload_exsersize[i]<<" | "<<br<<" | "<<frequency_Distribution<<"%"<<endl;
+                        break;
+                    }
+                }
+                i=j;
+            }
+        }
+        file.close();
+        return 1;
+    }
+};

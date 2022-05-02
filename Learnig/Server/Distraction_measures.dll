@@ -1,0 +1,86 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <string.h>
+#include <math.h>
+#include <fstream>
+#include "Measures_of_the_central_trend.dll"
+
+using namespace std;
+class Distraction_measures
+{
+    public:
+        int num_stud;
+        string Course_name;
+    Distraction_measures(string course_name)
+    {
+            Course_name=course_name;
+            Data_Base date=Data_Base(course_name);
+            string file_name=course_name+"_Distraction_measures.txt";
+            fstream file(file_name, std::fstream::out);
+            num_stud=date.get_Number_of_student(); 
+            if(file.is_open())
+            {
+            file<<"Distraction_measures\n";
+                for (int i=0;i<num_stud;i++)
+        	    {
+                
+                file<<date.get_Studet_id(i)<<"  "<<date.get_Upload_excersize(i)<<endl;
+                }
+            }
+            else cout<<"file not exist!"<<endl;
+            file.close();
+    }
+    int fuction_Distraction_measures()
+    {
+        double swing=0;
+        int max, min;
+        string file_name=Course_name+"_Distraction_measures.txt";
+        Data_Base date=Data_Base(Course_name);
+        fstream file(file_name, std::fstream::out| std::fstream::app);
+        int upload_exsersize[num_stud];
+        for(int i=0;i<num_stud;i++)
+        {
+            upload_exsersize[i]=date.get_Upload_excersize(i);
+        }
+        max=upload_exsersize[0];
+        min=upload_exsersize[0];
+        for(int i=0;i<num_stud;i++)
+        {
+            if(upload_exsersize[i]>max)
+            {
+                max=upload_exsersize[i];
+            }
+            if(upload_exsersize[i]<min)
+            {
+                min=upload_exsersize[i];
+            }
+        }
+        swing=max-min;
+        file<<"Swing :"<<swing<<endl;
+        double avarage;
+        for(int i=0;i<num_stud;i++)
+        {
+            avarage=avarage+upload_exsersize[i];
+        }
+        avarage=avarage/num_stud;
+        double sum=0;
+        for(int i=0;i<num_stud;i++)
+        {
+            double pow_dispersiq=0;
+            pow_dispersiq=(upload_exsersize[i]-avarage);
+            sum=sum+pow(pow_dispersiq, 2);
+
+        }
+        double dispersiq;
+        dispersiq=sum/num_stud;
+        dispersiq=pow(dispersiq, 2);
+        file<<"Dispersiq :"<<dispersiq<<endl;
+        double standart;
+        standart=sqrt(dispersiq);
+        file<<"Standartno otclonenie: "<<standart<<endl;
+
+        file.close();
+        return 3;
+    }
+};

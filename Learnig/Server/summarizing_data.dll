@@ -1,0 +1,80 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <string.h>
+#include <math.h>
+#include <fstream>
+using namespace std;
+
+
+class Summarazing_Data
+{
+public:
+struct Date
+{
+    string id;
+    string assessment;
+};
+
+int number_of_file_row(string file_name)
+{
+    int number=0;
+    fstream file(file_name, std::fstream::in);
+    string line;
+    if(file.is_open())
+    {
+        while(getline(file, line))
+        {
+            number++;
+        }
+    }else 
+        cout<<"File not exist!"<<endl;
+    return number;
+}
+
+void function_Summarazing_Data()
+{
+    int number_student=number_of_file_row("Course_A_StudentsResults_Year_1.txt");
+    Date date[number_student];
+    int number_of_first_student=number_of_file_row("Course_A_StudentsResults_Year_1.txt");
+    fstream file("Course_A_StudentsResults_Year_1.txt", std::fstream::in);
+    if(file.is_open())
+    {
+        for(int i=0;i<number_of_first_student;i++)
+        {
+            file>>date[i].id;
+            file>>date[i].assessment;
+        }
+    }
+    file.close();
+
+    fstream file_log("Logs_Course_A_StudentsActivities.txt", std::fstream::in);
+    fstream file_log2("Logs_Course.txt", std::fstream::out);
+
+    string line;
+    if(file_log.is_open())
+    {
+        for(int i=0;i<number_student;i++)
+        {
+        while(getline(file_log, line))
+        {
+            std::size_t found = line.find(date[i].id);
+            if (found!=std::string::npos)
+            {
+                file_log2<<date[i].id<<endl;
+                file_log2<<line<<endl;
+                break;
+            }
+            if (found==std::string::npos)
+            {   file_log2<<"Mising id: "<<date[i].id<<endl;
+                file_log2<<line<<endl;
+                break;
+            }
+            
+        }
+        }
+    }else 
+        cout<<"File not exist!"<<endl;
+    file_log.close();
+}
+};

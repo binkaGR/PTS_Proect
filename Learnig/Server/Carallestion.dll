@@ -1,0 +1,60 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <string.h>
+#include <math.h>
+#include <fstream>
+#include "Distraction_measures.dll"
+
+
+class Carallestion
+{
+    public: 
+    int num_stud;
+    string Course_name;
+    Carallestion(string course_name)
+    {   Course_name=course_name;
+        Data_Base date=Data_Base(course_name);
+        string file_name=course_name+"_correllation.txt";
+        fstream file(file_name, std::fstream::out);
+        num_stud=date.get_Number_of_student(); 
+        if(file.is_open())
+        {
+        file<<"Coreletion analisis\n";
+        for (int i=0;i<num_stud;i++)
+        	{
+                
+                file<<date.get_Studet_id(i)<<"  "<<date.get_See_lecture(i)<<"  "<<date.get_Assesment(i)<<endl;
+            }
+        }
+        else cout<<"file not exist!"<<endl;
+        file.close();
+    }
+    int function_correllation()
+    {
+        string file_name=Course_name+"_correllation.txt";
+        Data_Base date=Data_Base(Course_name);
+        fstream file(file_name, std::fstream::out| std::fstream::app);
+        double correlletion;
+        //int num_stud=date.number_student; 
+        double X=0, Y=0, XY=0, x_squer=0, y_squer=0;
+        for (int i=0;i<num_stud;i++)
+        {
+            X=X+date.get_See_lecture(i);
+            Y=Y+date.get_Assesment(i);
+            XY=XY+date.get_Assesment(i)*date.get_See_lecture(i);
+            x_squer=x_squer+(date.get_See_lecture(i)*date.get_See_lecture(i));
+            y_squer=y_squer+(date.get_Assesment(i)*date.get_Assesment(i));
+        }
+        double A, B;
+        A=(num_stud*x_squer)-pow(X,2);
+        B=(num_stud*y_squer)-pow(Y,2);
+        correlletion=((num_stud*XY)-(X*Y))/(sqrt(A*B));
+        if(file.is_open())
+        {
+            file<<"Correlation analis is equal: "<<setprecision(2)<<correlletion<<"%"<<endl;
+        } 
+        return 4; 
+    }
+
+};

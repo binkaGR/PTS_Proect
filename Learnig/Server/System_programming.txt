@@ -1,0 +1,80 @@
+7925
+Ivan Petrov
+8
+10
+4
+7926
+Tanita Sokolova
+1
+1
+2
+7945
+Kali Kostova
+8
+10
+4
+7946
+Hrisi Cvetanova
+2
+2
+4
+7927
+Mario Borisov
+3
+3
+4
+7947
+Bogomil Ivanov
+7
+10
+5
+7948
+Cvetan Hristov
+8
+8
+3
+7949
+Kalin Bogomilev
+12
+10
+5
+7928
+Silviq Tomova
+9
+10
+6
+7929
+Hrosto Mashov
+9
+10
+3
+7930
+Krasi
+Kostov
+7
+7
+6
+7950
+Iva
+Ivanova
+6
+5
+5
+7917
+Luboslav
+Blagoev
+9
+2
+4
+7931
+Kircho
+Atanasov
+7
+10
+6
+7951
+Hrisi
+Aleksandova
+8
+10
+6

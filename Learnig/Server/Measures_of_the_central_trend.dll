@@ -1,0 +1,123 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <string.h>
+#include <math.h>
+#include <fstream>
+#include "Frequency_Distribution.dll"
+
+using namespace std;
+class Measures_of_the_central_trend
+{
+    public:
+        int num_stud;
+        string Course_name; 
+        Measures_of_the_central_trend(string course_name)
+        {
+            Course_name=course_name;
+            Data_Base date=Data_Base(course_name);
+            string file_name=course_name+"_Measures_of_the_central_trend.txt";
+            fstream file(file_name, std::fstream::out);
+            num_stud=date.get_Number_of_student(); 
+            if(file.is_open())
+            {
+            file<<"Frequency_Distribution\n";
+                for (int i=0;i<num_stud;i++)
+        	    {
+                
+                file<<date.get_Studet_id(i)<<"  "<<date.get_Upload_excersize(i)<<endl;
+                }
+            }
+            else cout<<"file not exist!"<<endl;
+            file.close();
+        }
+
+
+    int functiion_Measures_of_the_central_trend()
+    {
+        string file_name=Course_name+"_Measures_of_the_central_trend.txt";
+        Data_Base date=Data_Base(Course_name);
+        fstream file(file_name, std::fstream::out| std::fstream::app);
+        int upload_exsersize[num_stud];
+        for(int i=0;i<num_stud;i++)
+        {
+            upload_exsersize[i]=date.get_Upload_excersize(i);
+        }
+        int swap;
+        for(int i=0;num_stud >i;i++)
+            {
+                for(int j=num_stud-1;j >i;j--)
+                if(upload_exsersize[j-1] >upload_exsersize[j])
+                {
+                    swap=upload_exsersize[j-1];
+                    upload_exsersize[j-1]=upload_exsersize[j];
+                    upload_exsersize[j]=swap;
+                }
+            }
+        double mediana;
+        if((num_stud%2)==0)
+        {
+            int i=num_stud/2;
+            mediana=(upload_exsersize[i]+upload_exsersize[i-1])/2;
+        }
+        if((num_stud%2)==1)
+        {
+            int i=num_stud/2;
+            mediana=upload_exsersize[i];
+        }
+        double Average_value=0;
+        for(int i=0;i<num_stud;i++)
+        {
+            Average_value=Average_value+upload_exsersize[i];
+        }
+        Average_value=Average_value/num_stud;
+        file<<"Avarage value is: "<<Average_value<<endl;
+        file<<"Medianata is : "<<mediana<<endl;
+        int max_moda=0, max_element=0;
+        for(int i=0;i<num_stud;i++)
+        {
+            int br=1;
+            int j=i;
+            while(j<num_stud)
+            {
+                if(upload_exsersize[i]==upload_exsersize[j+1])
+                    {
+                        br++;
+                        j++;
+                    }
+                else break;
+            }
+            i=j;
+            if(br>max_moda)
+            {
+                max_moda=br;
+                max_element=j;
+            }
+        }
+        file<<"Modata is : "<<upload_exsersize[max_element]<<endl;
+        for(int i=max_element;i<num_stud;i++)
+        {
+            int br=1;
+            int j=i;
+            while(j<num_stud)
+            {
+                if(upload_exsersize[i]==upload_exsersize[j+1])
+                    {
+                        br++;
+                        j++;
+                    }
+                else break;
+            }
+             i=j;
+            if(br==max_moda)
+            {
+                max_moda=br;
+                max_element=j;
+                file<<"Modata is : "<<upload_exsersize[max_element]<<endl;
+            }
+
+        }
+
+    return 2;
+    }
+};

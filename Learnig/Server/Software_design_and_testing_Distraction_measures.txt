@@ -1,0 +1,15 @@
+Distraction_measures
+7912  8
+8019  5
+7941  9
+7942  7
+7913  9
+7943  7
+7924  6
+7944  7
+7914  2
+7915  7
+7916  10
+Swing :8
+Dispersiq :19.0413
+Standartno otclonenie: 4.36364

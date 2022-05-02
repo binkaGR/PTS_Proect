@@ -1,0 +1,17 @@
+Frequency_Distribution
+7925  10
+7926  1
+7945  10
+7946  2
+7927  3
+7947  10
+7948  8
+7949  10
+7928  10
+7929  10
+7930  7
+7950  5
+7917  2
+Avarage value is: 6.76923
+Medianata is : 8
+Modata is : 10

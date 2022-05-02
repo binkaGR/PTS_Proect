@@ -1,0 +1,144 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <string.h>
+#include <math.h>
+#include <fstream>
+using namespace std;
+
+class Data_Base
+{
+    public:
+    string Course;
+    Data_Base(string course)
+    {
+        Course=course+".txt";
+        set_Couser_Info();
+        set_Studet_information();
+    } 
+
+
+    struct Course_Info
+    {
+        int course_id;
+        string name_corse;
+        string type_platform;
+        string name_platform;
+        string url_address;
+        string faied_application;
+    };
+
+
+    struct Studet_information
+    {
+        int student_id;
+        string student_name;
+        string student_last_name;
+        int number_see_lecture;
+        int number_upload_excersice;
+        double student_assement;
+    };  
+
+
+    int get_Number_of_student()
+    {
+        int number_of_student=0;
+        fstream file(Course, std::fstream::in);
+        if(file.is_open())
+        {
+            string line;
+            while(getline(file, line))
+            {
+                number_of_student++;
+            }
+        }
+        else
+            cout<<"File not exist!"<<endl;
+        file.close();
+        number_of_student=number_of_student/6;
+        return number_of_student;
+    }
+
+
+    int get_number_of_course()
+    {
+        int number_of_course=0;
+        fstream file("Data_Course.txt", std::fstream::in);
+        if(file.is_open())
+        {
+            string line;
+            while(getline(file, line))
+            {
+                number_of_course++;
+            }
+        }
+        else
+            cout<<"File not exist!"<<endl;
+        file.close();
+        number_of_course=number_of_course/6;
+        return number_of_course;
+    }
+
+    Course_Info course_info[40];
+    Studet_information student_information[40];
+    
+    void set_Couser_Info()
+    {
+        int get_number_course=get_number_of_course();
+        fstream file("Data_Course.txt", std::fstream::in);
+        if(file.is_open())
+        {
+            for(int i=0;i<get_number_course;i++)
+            {
+                file>>course_info[i].course_id;
+                file>>course_info[i].name_corse;
+                file>>course_info[i].name_platform;
+                file>>course_info[i].type_platform;
+                file>>course_info[i].faied_application;
+
+            }
+        }
+        else
+            cout<<"File not exist!"<<endl;
+        file.close();
+    }
+
+
+    void set_Studet_information()
+    {
+        int get_number_student=get_Number_of_student();
+        fstream file(Course, std::fstream::in);
+        if(file.is_open())
+        {
+            for(int i=0;i<get_number_student;i++)
+            {
+                file>>student_information[i].student_id;
+                file>>student_information[i].student_name;
+                file>>student_information[i].student_last_name;
+                file>>student_information[i].number_see_lecture;
+                file>>student_information[i].number_upload_excersice;
+                file>>student_information[i].student_assement;
+            }
+        }
+        else
+            cout<<"File not exist!"<<endl;
+        file.close();
+
+    }
+    int get_Studet_id(int i)
+    {
+        return student_information[i].student_id;
+    }
+    int get_See_lecture(int i)
+    {
+        return student_information[i].number_see_lecture;
+    }
+    int get_Upload_excersize(int i)
+    {
+        return student_information[i].number_upload_excersice;
+    }
+    double get_Assesment(int i)
+    {
+        return student_information[i].student_assement;
+    }
+};

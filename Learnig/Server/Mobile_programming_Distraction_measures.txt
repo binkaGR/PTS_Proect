@@ -1,0 +1,13 @@
+Frequency_Distribution
+7921  6
+7922  3
+7938  3
+7907  3
+7448  9
+7909  10
+7910  6
+7911  7
+6532  5
+Swing :7
+Dispersiq :35.4098
+Standartno otclonenie: 5.95062

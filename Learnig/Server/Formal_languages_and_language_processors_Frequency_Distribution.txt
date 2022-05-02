@@ -1,0 +1,19 @@
+Frequency_Distribution
+7932  6
+7952  10
+7918  9
+7953  8
+7933  1
+7934  10
+7919  9
+7954  6
+7955  1
+7935  10
+7936  10
+Frequency_Distribution analysis table!
+Number of uploaded exercises | Absolute frequency f | Relative frequency p (%)
+1 | 2 | 20%
+6 | 2 | 20%
+8 | 1 | 10%
+9 | 2 | 20%
+10 | 4 | 40%
